@@ -52,6 +52,22 @@ npm run build
 npm run preview
 ```
 
+## Running with ngrok
+
+To test the app with Telegram Mini App or expose it to the internet:
+
+1. Start the development server:
+```bash
+npm run dev
+```
+
+2. In a separate terminal, start ngrok:
+```bash
+ngrok http 3000
+```
+
+3. Use the provided ngrok URL (e.g., `https://xxxx.ngrok-free.dev`) to access your app from anywhere or set it as your Telegram Mini App URL.
+
 ## Development
 
 ### Code Quality
