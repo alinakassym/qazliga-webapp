@@ -1,0 +1,60 @@
+import type { FC } from 'react';
+import { Container, Typography, Box, Paper } from '@mui/material';
+import { getTelegramUser } from '@/utils/telegram';
+
+const HomePage: FC = () => {
+  const user = getTelegramUser();
+
+  return (
+    <Container maxWidth="sm" sx={{ py: 4 }}>
+      <Box sx={{ textAlign: 'center', mb: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          QAZLIGA
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Welcome to QAZLIGA Telegram WebApp
+        </Typography>
+      </Box>
+
+      {user && (
+        <Paper sx={{ p: 3, mb: 3 }}>
+          <Typography variant="h6" gutterBottom>
+            User Info
+          </Typography>
+          <Typography variant="body2">
+            <strong>ID:</strong> {user.id}
+          </Typography>
+          <Typography variant="body2">
+            <strong>Name:</strong> {user.first_name} {user.last_name || ''}
+          </Typography>
+          {user.username && (
+            <Typography variant="body2">
+              <strong>Username:</strong> @{user.username}
+            </Typography>
+          )}
+        </Paper>
+      )}
+
+      <Paper sx={{ p: 3 }}>
+        <Typography variant="h6" gutterBottom>
+          Getting Started
+        </Typography>
+        <Typography variant="body2" paragraph>
+          This is a starter template for QAZLIGA Telegram WebApp built with:
+        </Typography>
+        <Typography component="ul" variant="body2">
+          <li>React 19 + TypeScript</li>
+          <li>Vite - Fast build tool</li>
+          <li>Material UI - UI components</li>
+          <li>Redux Toolkit - State management</li>
+          <li>React Router - Routing</li>
+          <li>Tailwind CSS - Utility-first CSS</li>
+          <li>React Query - Server state management</li>
+          <li>Telegram WebApp SDK - Telegram integration</li>
+        </Typography>
+      </Paper>
+    </Container>
+  );
+};
+
+export default HomePage;
