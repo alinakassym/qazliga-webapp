@@ -3,6 +3,7 @@
 import type { FC } from 'react';
 import { AppBar, Box, Container, Toolbar, useTheme } from '@mui/material';
 import { SponsorsBar } from './SponsorsBar';
+import { SelectsRow } from './SelectsRow';
 import { useSafePaddingTop, useSafePlatform } from '@/hooks';
 import logoUrl from '@/assets/qazliga-logo.png';
 
@@ -30,6 +31,7 @@ const Header: FC<HeaderProps> = ({ showSponsors = false }) => {
           sx={{
             minHeight: { xs: '64px', sm: '70px' },
             pt: platform === 'android' ? `${safePaddingTop - 14}px` : `${safePaddingTop + 3}px`,
+            pb: 1,
           }}
         >
           <Box
@@ -55,6 +57,7 @@ const Header: FC<HeaderProps> = ({ showSponsors = false }) => {
         </Toolbar>
 
         {showSponsors && <SponsorsBar />}
+        <SelectsRow />
       </Container>
     </AppBar>
   );
