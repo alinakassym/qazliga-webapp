@@ -1,26 +1,19 @@
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import {
-  BottomNavigation as MuiBottomNavigation,
-  BottomNavigationAction,
-  Paper,
-} from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import PersonIcon from '@mui/icons-material/Person';
+import { BottomNavigation as MuiBottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
+import { TabIcon } from '@/components';
 
 interface NavigationItem {
   label: string;
   path: string;
-  icon: ReactElement;
+  iconName: 'home' | 'trophy' | 'leaderboard' | 'person';
 }
 
 const navigationItems: NavigationItem[] = [
-  { label: 'Главная', path: '/', icon: <HomeIcon /> },
-  { label: 'Лиги', path: '/leagues', icon: <EmojiEventsIcon /> },
-  { label: 'Рейтинг', path: '/rating', icon: <LeaderboardIcon /> },
-  { label: 'Профиль', path: '/profile', icon: <PersonIcon /> },
+  { label: 'Главная', path: '/', iconName: 'home' },
+  { label: 'Лиги', path: '/leagues', iconName: 'trophy' },
+  { label: 'Рейтинг', path: '/rating', iconName: 'leaderboard' },
+  { label: 'Профиль', path: '/profile', iconName: 'person' },
 ];
 
 export const BottomNavigation: FC = () => {
@@ -50,7 +43,7 @@ export const BottomNavigation: FC = () => {
           <BottomNavigationAction
             key={item.path}
             label={item.label}
-            icon={item.icon}
+            icon={<TabIcon name={item.iconName} size={24} />}
             sx={{
               minWidth: 'auto',
               '&.Mui-selected': {
