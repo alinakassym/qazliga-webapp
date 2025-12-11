@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Container, Typography, Box, Paper } from '@mui/material';
+import { Container, Typography, Paper } from '@mui/material';
 import { getTelegramUser } from '@/utils/telegram';
 
 const HomePage: FC = () => {

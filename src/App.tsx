@@ -44,7 +44,14 @@ const App: FC = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Router>
-            <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <Box
+              sx={{
+                minHeight: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: theme.palette.surface,
+              }}
+            >
               <Header />
               <Box component="main" sx={{ flexGrow: 1, pb: 7 }}>
                 <Routes>

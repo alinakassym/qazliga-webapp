@@ -79,7 +79,12 @@ const icons: Record<string, IconDef> = {
   },
 };
 
-export const TabIcon: FC<TabIconProps> = ({ name, size = 24, color = 'currentColor', className }) => {
+export const TabIcon: FC<TabIconProps> = ({
+  name,
+  size = 24,
+  color = 'currentColor',
+  className,
+}) => {
   const icon = icons[name];
   if (!icon) {
     console.warn(`Icon "${name}" not found`);
