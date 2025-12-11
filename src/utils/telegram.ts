@@ -1,5 +1,12 @@
 import type { TelegramUser } from '@/types';
 
+interface SafeAreaInset {
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+}
+
 interface TelegramWebApp {
   initData: string;
   initDataUnsafe: {
@@ -26,6 +33,8 @@ interface TelegramWebApp {
   headerColor: string;
   backgroundColor: string;
   isClosingConfirmationEnabled: boolean;
+  safeAreaInset?: SafeAreaInset;
+  contentSafeAreaInset?: SafeAreaInset;
   BackButton: {
     isVisible: boolean;
     onClick: (callback: () => void) => void;
