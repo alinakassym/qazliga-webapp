@@ -1,56 +1,48 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, type PaletteMode } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface Palette {
-    telegram: {
-      bg: string;
-      text: string;
-      hint: string;
-      link: string;
-      button: string;
-      buttonText: string;
-      secondaryBg: string;
-    };
+    tertiary: Palette['primary'];
+    gradient: string[];
+    cardBorder: string;
+    surface: string;
+    customBackground: string;
+    dark: string;
   }
   interface PaletteOptions {
-    telegram?: {
-      bg?: string;
-      text?: string;
-      hint?: string;
-      link?: string;
-      button?: string;
-      buttonText?: string;
-      secondaryBg?: string;
-    };
+    tertiary?: PaletteOptions['primary'];
+    gradient?: string[];
+    cardBorder?: string;
+    surface?: string;
+    customBackground?: string;
+    dark?: string;
   }
 }
 
-export const createAppTheme = (colorScheme: 'light' | 'dark' = 'light') => {
-  const telegramColors = {
-    bg: colorScheme === 'light' ? '#ffffff' : '#212121',
-    text: colorScheme === 'light' ? '#000000' : '#ffffff',
-    hint: colorScheme === 'light' ? '#999999' : '#aaaaaa',
-    link: colorScheme === 'light' ? '#2481cc' : '#62bcf9',
-    button: colorScheme === 'light' ? '#2481cc' : '#62bcf9',
-    buttonText: colorScheme === 'light' ? '#ffffff' : '#ffffff',
-    secondaryBg: colorScheme === 'light' ? '#f4f4f5' : '#0f0f0f',
-  };
-
+export const createAppTheme = (mode: PaletteMode = 'light') => {
   return createTheme({
     palette: {
-      mode: colorScheme,
+      mode,
       primary: {
-        main: telegramColors.button,
+        main: '#5060D8',
       },
-      background: {
-        default: telegramColors.bg,
-        paper: telegramColors.secondaryBg,
+      secondary: {
+        main: '#8450D8',
       },
-      text: {
-        primary: telegramColors.text,
-        secondary: telegramColors.hint,
+      tertiary: {
+        main: '#50A4D8',
       },
-      telegram: telegramColors,
+      gradient: ['#5060D8', '#5060D8', '#8450D8', '#50A4D8'],
+      success: {
+        main: mode === 'light' ? '#16A34A' : '#34D399',
+      },
+      cardBorder: mode === 'light' ? '#EDF2F8' : '#1D1527',
+      surface: mode === 'light' ? '#EAECFA' : '#1D1527',
+      customBackground: mode === 'light' ? '#F9FAFE' : 'rgba(39, 27, 56, 1)',
+      dark: '#271B38',
+    },
+    shape: {
+      borderRadius: 8,
     },
     typography: {
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
@@ -59,8 +51,25 @@ export const createAppTheme = (colorScheme: 'light' | 'dark' = 'light') => {
       MuiButton: {
         styleOverrides: {
           root: {
+            borderRadius: 8,
             textTransform: 'none',
-            borderRadius: '12px',
+            padding: '14px',
+            boxShadow: 'none',
+            '&:hover': {
+              boxShadow: 'none',
+            },
+            '&:active': {
+              boxShadow: 'none',
+            },
+          },
+        },
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            '& .MuiOutlinedInput-root': {
+              borderRadius: 8,
+            },
           },
         },
       },
