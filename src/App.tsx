@@ -10,7 +10,11 @@ import { store } from '@/store';
 import { createAppTheme } from '@/theme';
 import { getTelegramWebApp, getTelegramColorScheme } from '@/utils/telegram';
 import { Header } from '@/components/Header';
+import { BottomNavigation } from '@/components/BottomNavigation';
 import HomePage from '@/pages/HomePage';
+import LeaguesPage from '@/pages/LeaguesPage';
+import RatingPage from '@/pages/RatingPage';
+import ProfilePage from '@/pages/ProfilePage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,11 +46,15 @@ const App: FC = () => {
           <Router>
             <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
               <Header />
-              <Box component="main" sx={{ flexGrow: 1 }}>
+              <Box component="main" sx={{ flexGrow: 1, pb: 7 }}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
+                  <Route path="/leagues" element={<LeaguesPage />} />
+                  <Route path="/rating" element={<RatingPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
                 </Routes>
               </Box>
+              <BottomNavigation />
             </Box>
           </Router>
         </ThemeProvider>
