@@ -7,15 +7,6 @@ const HomePage: FC = () => {
 
   return (
     <Container maxWidth="sm" sx={{ py: 4 }}>
-      <Box sx={{ textAlign: 'center', mb: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          QAZLIGA
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Welcome to QAZLIGA Telegram WebApp
-        </Typography>
-      </Box>
-
       {user && (
         <Paper sx={{ p: 3, mb: 3 }}>
           <Typography variant="h6" gutterBottom>
