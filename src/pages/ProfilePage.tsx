@@ -1,15 +1,20 @@
 import type { FC, ReactElement } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import { UserCard } from '@/components';
+import { getTelegramUser } from '@/utils/telegram';
 
 const ProfilePage: FC = (): ReactElement => {
+  const user = getTelegramUser();
+
   return (
     <Box sx={{ p: 2 }}>
-      <Typography variant="h5" component="h1" sx={{ mb: 2 }}>
-        Профиль
-      </Typography>
-      <Typography variant="body1" color="text.secondary">
-        Здесь будет профиль пользователя
-      </Typography>
+      {user && (
+        <UserCard
+          photoUrl={user?.photo_url ?? undefined}
+          name={`${user.first_name}${user.last_name ? ' ' + user.last_name : ''}`}
+          username={user.username}
+        />
+      )}
     </Box>
   );
 };
