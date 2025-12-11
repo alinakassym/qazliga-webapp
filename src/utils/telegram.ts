@@ -74,6 +74,8 @@ interface TelegramWebApp {
   ready: () => void;
   expand: () => void;
   close: () => void;
+  requestFullscreen: () => void;
+  exitFullscreen: () => void;
   enableClosingConfirmation: () => void;
   disableClosingConfirmation: () => void;
   showPopup: (params: {

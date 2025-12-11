@@ -35,6 +35,7 @@ const App: FC = () => {
     if (webApp) {
       webApp.ready();
       webApp.expand();
+      webApp.requestFullscreen();
     }
   }, []);
 
