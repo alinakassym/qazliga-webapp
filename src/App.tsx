@@ -2,12 +2,14 @@ import { useEffect, useMemo } from 'react';
 import type { FC } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
+import { Box } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
 import { createAppTheme } from '@/theme';
 import { getTelegramWebApp, getTelegramColorScheme } from '@/utils/telegram';
+import { Header } from '@/components/Header';
 import HomePage from '@/pages/HomePage';
 
 const queryClient = new QueryClient({
@@ -38,9 +40,14 @@ const App: FC = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Router>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-            </Routes>
+            <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+              <Header />
+              <Box component="main" sx={{ flexGrow: 1 }}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                </Routes>
+              </Box>
+            </Box>
           </Router>
         </ThemeProvider>
       </QueryClientProvider>

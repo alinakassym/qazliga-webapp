@@ -16,3 +16,5 @@ export interface TelegramUser {
 }
 
 export type LoadingState = 'idle' | 'loading' | 'succeeded' | 'failed';
+
+export * from './sponsors';
