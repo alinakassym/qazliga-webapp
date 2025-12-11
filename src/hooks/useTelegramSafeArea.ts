@@ -107,3 +107,19 @@ export const useSafePaddingTop = (defaultPaddingTelegram = 48, defaultPaddingWeb
 
   return safeAreaData.top > 0 ? safeAreaData.top : defaultPaddingTelegram;
 };
+
+/**
+ * Хук для получения правильного paddingBottom с учетом safe area
+ * @param defaultPaddingTelegram - дефолтный отступ для Telegram (если safe area недоступен)
+ * @param defaultPaddingWeb - дефолтный отступ для веба
+ */
+export const useSafePaddingBottom = (defaultPaddingTelegram = 16, defaultPaddingWeb = 0) => {
+  const isTelegram = isTelegramWebApp();
+  const safeAreaData = useTelegramSafeArea();
+
+  if (!isTelegram) {
+    return defaultPaddingWeb;
+  }
+
+  return safeAreaData.bottom > 0 ? safeAreaData.bottom : defaultPaddingTelegram;
+};

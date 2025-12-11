@@ -1,7 +1,12 @@
 import type { FC } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { BottomNavigation as MuiBottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
+import {
+  BottomNavigation as MuiBottomNavigation,
+  BottomNavigationAction,
+  Paper,
+} from '@mui/material';
 import { TabIcon } from '@/components';
+import { useSafePaddingBottom, useSafePlatform } from '@/hooks';
 
 interface NavigationItem {
   label: string;
@@ -19,6 +24,8 @@ const navigationItems: NavigationItem[] = [
 export const BottomNavigation: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const safePaddingBottom = useSafePaddingBottom(16, 0);
+  const platform = useSafePlatform();
 
   const currentPath = location.pathname;
   const currentValue = navigationItems.findIndex(item => item.path === currentPath);
@@ -38,7 +45,14 @@ export const BottomNavigation: FC = () => {
       }}
       elevation={3}
     >
-      <MuiBottomNavigation value={currentValue !== -1 ? currentValue : 0} onChange={handleChange}>
+      <MuiBottomNavigation
+        value={currentValue !== -1 ? currentValue : 0}
+        onChange={handleChange}
+        showLabels
+        sx={{
+          pb: `${platform === 'ios' && safePaddingBottom + 2}px`,
+        }}
+      >
         {navigationItems.map(item => (
           <BottomNavigationAction
             key={item.path}
