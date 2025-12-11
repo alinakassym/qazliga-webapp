@@ -1,15 +1,14 @@
 import type { FC } from 'react';
-import { Container, Typography, Paper, useTheme } from '@mui/material';
+import { Container, Typography, Paper } from '@mui/material';
 import { getTelegramUser } from '@/utils/telegram';
 
 const HomePage: FC = () => {
   const user = getTelegramUser();
-  const theme = useTheme();
 
   return (
     <Container maxWidth="sm" sx={{ py: 4 }}>
       {user && (
-        <Paper sx={{ p: 3, mb: 3, backgroundColor: theme.palette.surface }}>
+        <Paper sx={{ p: 3, mb: 3, backgroundColor: theme => theme.palette.surface }}>
           <Typography variant="h6" gutterBottom>
             User Info
           </Typography>
@@ -27,7 +26,7 @@ const HomePage: FC = () => {
         </Paper>
       )}
 
-      <Paper sx={{ p: 3, backgroundColor: theme.palette.surface }}>
+      <Paper sx={{ p: 3, backgroundColor: theme => theme.palette.surface }}>
         <Typography variant="h6" gutterBottom>
           Getting Started
         </Typography>

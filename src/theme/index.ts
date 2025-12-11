@@ -39,8 +39,8 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
         main: mode === 'light' ? '#16A34A' : '#34D399',
       },
       cardBorder: mode === 'light' ? '#EDF2F8' : '#1D1527',
-      surface: mode === 'light' ? '#EAECFA' : '#1D1527',
-      appBackground: mode === 'light' ? '#F9FAFE' : 'rgba(39, 27, 56, 1)',
+      surface: mode === 'light' ? '#F9FAFE' : 'rgba(39, 27, 56, 1)',
+      appBackground: mode === 'light' ? '#EAECFA' : '#1D1527',
       dark: '#271B38',
     },
     shape: {

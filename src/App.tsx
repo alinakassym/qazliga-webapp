@@ -49,7 +49,7 @@ const App: FC = () => {
                 minHeight: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: theme.palette.surface,
+                backgroundColor: theme.palette.appBackground,
               }}
             >
               <Header />
