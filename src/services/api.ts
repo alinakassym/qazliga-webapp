@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getTelegramWebApp } from '@/utils/telegram';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://api.steppe.dev/scoreapp/api';
 
 export const api = axios.create({
   baseURL: API_URL,
@@ -16,6 +16,12 @@ api.interceptors.request.use(config => {
   if (webApp?.initData) {
     config.headers['X-Telegram-Init-Data'] = webApp.initData;
   }
+
+  const bearerToken = import.meta.env.VITE_BEARER_TOKEN;
+  if (bearerToken) {
+    config.headers.Authorization = `Bearer ${bearerToken}`;
+  }
+
   return config;
 });
 

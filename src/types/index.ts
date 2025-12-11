@@ -18,4 +18,9 @@ export interface TelegramUser {
 
 export type LoadingState = 'idle' | 'loading' | 'succeeded' | 'failed';
 
+export interface City {
+  id: number;
+  name: string;
+}
+
 export * from './sponsors';

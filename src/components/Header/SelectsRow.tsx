@@ -1,14 +1,16 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Box, Select, MenuItem, FormControl } from '@mui/material';
+import { Box, Select, MenuItem, FormControl, CircularProgress } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
+import { useCities } from '@/hooks';
 
 export const SelectsRow: FC = () => {
-  const [firstValue, setFirstValue] = useState('option1');
+  const { data: cities, isLoading, isError } = useCities();
+  const [selectedCityId, setSelectedCityId] = useState<string>('');
   const [secondValue, setSecondValue] = useState('option1');
 
-  const handleFirstChange = (event: SelectChangeEvent) => {
-    setFirstValue(event.target.value);
+  const handleCityChange = (event: SelectChangeEvent) => {
+    setSelectedCityId(event.target.value);
   };
 
   const handleSecondChange = (event: SelectChangeEvent) => {
@@ -23,11 +25,19 @@ export const SelectsRow: FC = () => {
         pb: 2,
       }}
     >
-      <FormControl sx={{ flex: 1 }}>
+      <FormControl sx={{ flex: 1 }} disabled={isLoading || isError}>
         <Select
-          value={firstValue}
-          onChange={handleFirstChange}
+          value={selectedCityId}
+          onChange={handleCityChange}
           size="small"
+          displayEmpty
+          renderValue={selected => {
+            if (!selected) {
+              return <span style={{ opacity: 0.6 }}>Выберите город</span>;
+            }
+            const city = cities?.find(c => c.id.toString() === selected);
+            return city?.name || '';
+          }}
           sx={{
             backgroundColor: theme => theme.palette.bgOpacity,
             backdropFilter: 'blur(10px)',
@@ -44,9 +54,17 @@ export const SelectsRow: FC = () => {
             },
           }}
         >
-          <MenuItem value="option1">Опция 1</MenuItem>
-          <MenuItem value="option2">Опция 2</MenuItem>
-          <MenuItem value="option3">Опция 3</MenuItem>
+          {isLoading && (
+            <MenuItem disabled>
+              <CircularProgress size={20} />
+            </MenuItem>
+          )}
+          {isError && <MenuItem disabled>Ошибка загрузки</MenuItem>}
+          {cities?.map(city => (
+            <MenuItem key={city.id} value={city.id.toString()}>
+              {city.name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 
