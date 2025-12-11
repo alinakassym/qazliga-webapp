@@ -1,3 +1,5 @@
+// qazliga/src/components/Header/Header.tsx
+
 import type { FC } from 'react';
 import { AppBar, Box, Container, Toolbar, useTheme } from '@mui/material';
 import { SponsorsBar } from './SponsorsBar';
@@ -9,14 +11,14 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ showSponsors = false }) => {
   const theme = useTheme();
+  const gradient = theme.palette.gradient;
 
   return (
     <AppBar
       position="sticky"
       elevation={0}
       sx={{
-        background: `linear-gradient(135deg, ${theme.palette.mode === 'dark' ? '#4a148c 0%, #7b1fa2 100%' : '#5e35b1 0%, #7e57c2 100%'})`,
-        borderBottom: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)'}`,
+        background: `linear-gradient(135deg, ${gradient[0]} 0%, ${gradient[1]} 33%, ${gradient[2]} 66%, ${gradient[3]} 100%)`,
       }}
     >
       <Container maxWidth="lg">

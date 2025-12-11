@@ -1,3 +1,5 @@
+// qazliga/src/theme/index.ts
+
 import { createTheme, type PaletteMode } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
