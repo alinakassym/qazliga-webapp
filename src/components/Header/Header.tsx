@@ -3,7 +3,7 @@
 import type { FC } from 'react';
 import { AppBar, Box, Container, Toolbar, useTheme } from '@mui/material';
 import { SponsorsBar } from './SponsorsBar';
-import { useSafePaddingTop } from '@/hooks';
+import { useSafePaddingTop, useSafePlatform } from '@/hooks';
 import logoUrl from '@/assets/qazliga-logo.png';
 
 interface HeaderProps {
@@ -14,6 +14,7 @@ const Header: FC<HeaderProps> = ({ showSponsors = false }) => {
   const theme = useTheme();
   const gradient = theme.palette.gradient;
   const safePaddingTop = useSafePaddingTop(48, 0);
+  const platform = useSafePlatform();
 
   return (
     <AppBar
@@ -28,7 +29,7 @@ const Header: FC<HeaderProps> = ({ showSponsors = false }) => {
           disableGutters
           sx={{
             minHeight: { xs: '64px', sm: '70px' },
-            pt: `${safePaddingTop}px`,
+            pt: platform === 'android' ? `${safePaddingTop - 14}px` : `${safePaddingTop + 3}px`,
           }}
         >
           <Box
