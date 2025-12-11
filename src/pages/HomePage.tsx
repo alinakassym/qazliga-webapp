@@ -43,6 +43,19 @@ const HomePage: FC = () => {
           <li>React Query - Server state management</li>
           <li>Telegram WebApp SDK - Telegram integration</li>
         </Typography>
+        <Typography variant="body2" sx={{ mt: 2 }}>
+          Start building your QAZLIGA WebApp by modifying the code in the <code>src/</code>{' '}
+          directory.
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci corporis veniam aut
+            magnam earum? Eos nesciunt dolorem similique tempore et repellendus unde soluta
+            adipisci! Quod reiciendis aliquam suscipit quidem eveniet? Non repudiandae consequuntur
+            reprehenderit earum molestias vel dolores pariatur harum nostrum natus veniam quos
+            aliquid ipsum sint, quo ipsa eos, quia nobis totam recusandae delectus quasi sequi odit
+            magni. Doloribus? Commodi temporibus, repellat dolor voluptate exercitationem similique
+            corporis cumque
+          </p>
+        </Typography>
       </Paper>
     </Container>
   );
