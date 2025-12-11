@@ -34,7 +34,7 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
       tertiary: {
         main: '#50A4D8',
       },
-      gradient: ['#5060D8', '#5060D8', '#8450D8', '#50A4D8'],
+      gradient: ['#5060D8', '#5060D8', '#8450D8', '#8450D8', '#7BB02A', '#50A4D8'],
       success: {
         main: mode === 'light' ? '#16A34A' : '#34D399',
       },

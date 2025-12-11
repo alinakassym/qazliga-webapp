@@ -21,7 +21,7 @@ const Header: FC<HeaderProps> = ({ showSponsors = false }) => {
       position="sticky"
       elevation={0}
       sx={{
-        background: `linear-gradient(135deg, ${gradient[0]} 0%, ${gradient[1]} 33%, ${gradient[2]} 66%, ${gradient[3]} 100%)`,
+        background: `linear-gradient(145deg, ${gradient})`,
       }}
     >
       <Container maxWidth="lg">
