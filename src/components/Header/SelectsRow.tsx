@@ -108,13 +108,13 @@ export const SelectsRow: FC = () => {
             WebkitBackdropFilter: 'blur(10px)',
             borderRadius: 2,
             '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'transparent',
+              border: 'none',
             },
             '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: theme => theme.palette.primary.main,
+              border: 'none',
             },
             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: theme => theme.palette.primary.main,
+              border: 'none',
             },
           }}
         >
@@ -149,13 +149,13 @@ export const SelectsRow: FC = () => {
             WebkitBackdropFilter: 'blur(10px)',
             borderRadius: 2,
             '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'transparent',
+              border: 'none',
             },
             '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: theme => theme.palette.primary.main,
+              border: 'none',
             },
             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: theme => theme.palette.primary.main,
+              border: 'none',
             },
           }}
         >
@@ -195,13 +195,13 @@ export const SelectsRow: FC = () => {
             WebkitBackdropFilter: 'blur(10px)',
             borderRadius: 2,
             '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'transparent',
+              border: 'none',
             },
             '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: theme => theme.palette.primary.main,
+              border: 'none',
             },
             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: theme => theme.palette.primary.main,
+              border: 'none',
             },
           }}
         >
