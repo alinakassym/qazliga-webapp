@@ -90,8 +90,12 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
             backgroundColor: theme.palette.surface,
             backgroundImage: 'none',
             boxShadow: 'none',
+            borderTop: `1px solid ${theme.palette.cardBorder}`,
             '&:before': {
               display: 'none',
+            },
+            '&:first-of-type': {
+              borderTop: 'none',
             },
             '&.Mui-expanded': {
               margin: 0,
