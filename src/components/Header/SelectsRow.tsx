@@ -2,7 +2,7 @@
 
 import type { FC } from 'react';
 import { useMemo, useState } from 'react';
-import { Box, Select, MenuItem, FormControl, CircularProgress } from '@mui/material';
+import { Box, Select, MenuItem, FormControl, CircularProgress, Avatar } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
 import { useCities, useLeagues } from '@/hooks';
 import { SportIcon } from '../icons/SportIcons';
@@ -141,7 +141,13 @@ export const SelectsRow: FC = () => {
               return <span style={{ opacity: 0.6 }}>Выберите город</span>;
             }
             const city = cities?.find(c => c.id.toString() === selected);
-            return city?.name || '';
+            if (!city) return '';
+            return (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <Avatar src={city.icon} alt={city.name} sx={{ width: 24, height: 24 }} />
+                <span>{city.name}</span>
+              </Box>
+            );
           }}
           sx={{
             backgroundColor: theme => theme.palette.bgOpacity,
@@ -167,7 +173,10 @@ export const SelectsRow: FC = () => {
           {isError && <MenuItem disabled>Ошибка загрузки</MenuItem>}
           {cities?.map(city => (
             <MenuItem key={city.id} value={city.id.toString()}>
-              {city.name}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <Avatar src={city.icon} alt={city.name} sx={{ width: 24, height: 24 }} />
+                <span>{city.name}</span>
+              </Box>
             </MenuItem>
           ))}
         </Select>
