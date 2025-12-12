@@ -107,7 +107,7 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
         styleOverrides: {
           root: ({ theme }) => ({
             '&.MuiMenu-paper': {
-              backgroundColor: theme.palette.bgOpacity,
+              backgroundColor: theme.palette.overlayOpacity,
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
             },

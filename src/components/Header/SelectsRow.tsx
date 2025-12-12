@@ -82,7 +82,7 @@ export const SelectsRow: FC = () => {
     <Box
       sx={{
         display: 'flex',
-        gap: 2,
+        gap: 1,
         pb: 2,
       }}
     >

@@ -14,6 +14,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   Avatar,
+  Container,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useLeagues } from '@/hooks';
@@ -36,7 +37,7 @@ const LeaguesPage: FC = (): ReactElement => {
   }, [data]);
 
   return (
-    <Box sx={{ p: 2 }}>
+    <Container maxWidth="sm" sx={{ py: 2 }}>
       {isLoading && (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
           <CircularProgress />
@@ -50,7 +51,7 @@ const LeaguesPage: FC = (): ReactElement => {
       )}
 
       {data?.leagues && (
-        <Box>
+        <Box sx={{ borderRadius: 2, overflow: 'hidden' }}>
           {Object.entries(leaguesByCity).map(([cityName, leagues]) => (
             <Accordion key={cityName}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -78,7 +79,7 @@ const LeaguesPage: FC = (): ReactElement => {
           ))}
         </Box>
       )}
-    </Box>
+    </Container>
   );
 };
 

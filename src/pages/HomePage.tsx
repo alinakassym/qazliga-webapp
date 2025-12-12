@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Container, Typography, Paper, Box } from '@mui/material';
-import { Carousel, SportIcon } from '@/components';
+import { Carousel } from '@/components';
 import banner1 from '@/assets/1.png';
 import banner2 from '@/assets/2.png';
 import banner3 from '@/assets/3.png';
@@ -40,12 +40,12 @@ const HomePage: FC = () => {
   ];
 
   return (
-    <Container maxWidth="sm" sx={{ py: 4 }}>
-      <Box sx={{ mb: 3 }}>
+    <Container maxWidth="sm" sx={{ py: 2 }}>
+      <Box sx={{ mb: 2 }}>
         <Carousel items={carouselItems} autoPlayInterval={4000} />
       </Box>
 
-      <Paper sx={{ p: 3, backgroundColor: theme => theme.palette.surface }}>
+      <Paper sx={{ p: 3, borderRadius: 2, backgroundColor: theme => theme.palette.surface }}>
         <Typography variant="h6" gutterBottom>
           Getting Started
         </Typography>
