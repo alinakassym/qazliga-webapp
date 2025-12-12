@@ -27,7 +27,9 @@ export default defineConfig([
     },
     rules: {
       'prettier/prettier': 'error',
+      'no-extra-semi': 'error',
+      '@typescript-eslint/no-extra-semi': 'error',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },
-])
+]);
