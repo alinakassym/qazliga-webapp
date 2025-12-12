@@ -11,7 +11,8 @@ const ProfilePage: FC = (): ReactElement => {
       {user && (
         <UserCard
           photoUrl={user?.photo_url ?? undefined}
-          name={`${user.first_name}${user.last_name ? ' ' + user.last_name : ''}`}
+          firstName={user?.first_name ?? undefined}
+          lastName={user?.last_name ?? undefined}
           username={user.username}
         />
       )}

@@ -36,7 +36,7 @@ export const BottomNavigation: FC = () => {
     <div
       style={{
         position: 'fixed',
-        bottom: `${platform === 'ios' && safePaddingBottom + 6}px`,
+        bottom: `${platform === 'ios' ? safePaddingBottom + 6 : safePaddingBottom}px`,
         left: 8,
         right: 8,
 

@@ -53,7 +53,7 @@ const App: FC = () => {
               }}
             >
               <Header />
-              <Box component="main" sx={{ flexGrow: 1, pb: 7 }}>
+              <Box component="main" sx={{ flexGrow: 1, pb: 12 }}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/leagues" element={<LeaguesPage />} />

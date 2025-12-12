@@ -3,11 +3,12 @@ import { Box, Avatar, Typography } from '@mui/material';
 
 interface UserCardProps {
   photoUrl?: string;
-  name: string;
-  username?: string;
+  firstName?: string;
+  lastName?: string;
+  username: string;
 }
 
-export const UserCard: FC<UserCardProps> = ({ photoUrl, name, username }) => {
+export const UserCard: FC<UserCardProps> = ({ photoUrl, firstName, lastName, username }) => {
   return (
     <Box
       sx={{
@@ -21,18 +22,24 @@ export const UserCard: FC<UserCardProps> = ({ photoUrl, name, username }) => {
     >
       <Avatar
         src={photoUrl}
-        alt={name}
+        alt={username}
         sx={{
-          width: 56,
-          height: 56,
+          width: 64,
+          height: 64,
+          fontSize: 24,
+          fontWeight: '600',
+          textAlign: 'center',
+          backgroundColor: theme => theme.palette.primary.main,
         }}
       >
-        {!photoUrl && name.charAt(0).toUpperCase()}
+        {firstName && lastName
+          ? firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase()
+          : username.charAt(0).toUpperCase()}
       </Avatar>
 
       <Box sx={{ flex: 1 }}>
         <Typography variant="h6" sx={{ marginBottom: 1, fontWeight: 600, lineHeight: 1 }}>
-          {name}
+          {`${firstName ?? ''}${lastName ? ' ' + lastName : ''}`}
         </Typography>
         {username && (
           <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1 }}>
