@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import type { FC } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,6 +14,7 @@ import HomePage from '@/pages/HomePage';
 import LeaguesPage from '@/pages/LeaguesPage';
 import RatingPage from '@/pages/RatingPage';
 import ProfilePage from '@/pages/ProfilePage';
+import ManagementPage from '@/pages/ManagementPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,6 +25,34 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+const AppContent: FC = () => {
+  const location = useLocation();
+  const isManagementPage = location.pathname === '/management';
+
+  return (
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: theme => theme.palette.appBackground,
+      }}
+    >
+      {!isManagementPage && <Header />}
+      <Box component="main" sx={{ flexGrow: 1, pb: isManagementPage ? 0 : 12 }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/leagues" element={<LeaguesPage />} />
+          <Route path="/rating" element={<RatingPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/management" element={<ManagementPage />} />
+        </Routes>
+      </Box>
+      {!isManagementPage && <BottomNavigation />}
+    </Box>
+  );
+};
 
 const App: FC = () => {
   const colorScheme = getTelegramColorScheme();
@@ -44,25 +73,7 @@ const App: FC = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Router>
-            <Box
-              sx={{
-                minHeight: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: theme.palette.appBackground,
-              }}
-            >
-              <Header />
-              <Box component="main" sx={{ flexGrow: 1, pb: 12 }}>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/leagues" element={<LeaguesPage />} />
-                  <Route path="/rating" element={<RatingPage />} />
-                  <Route path="/profile" element={<ProfilePage />} />
-                </Routes>
-              </Box>
-              <BottomNavigation />
-            </Box>
+            <AppContent />
           </Router>
         </ThemeProvider>
       </QueryClientProvider>
