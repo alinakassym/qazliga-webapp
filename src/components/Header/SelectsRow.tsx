@@ -136,6 +136,15 @@ export const SelectsRow: FC = () => {
           onChange={handleCityChange}
           size="small"
           displayEmpty
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                maxHeight: '60vh',
+                width: '80%',
+                overflowY: 'auto',
+              },
+            },
+          }}
           renderValue={selected => {
             if (!selected) {
               return <span style={{ opacity: 0.6 }}>Выберите город</span>;
