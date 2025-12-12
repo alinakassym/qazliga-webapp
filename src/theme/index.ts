@@ -103,6 +103,32 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
           }),
         },
       },
+      MuiPaper: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            '&.MuiMenu-paper': {
+              backgroundColor: theme.palette.bgOpacity,
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+            },
+          }),
+        },
+      },
+      MuiMenuItem: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            '&:hover': {
+              backgroundColor: theme.palette.opacity,
+            },
+            '&.Mui-selected': {
+              backgroundColor: theme.palette.bgOpacity,
+              '&:hover': {
+                backgroundColor: theme.palette.opacity,
+              },
+            },
+          }),
+        },
+      },
     },
   });
 };
