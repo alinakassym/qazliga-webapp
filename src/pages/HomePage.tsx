@@ -1,6 +1,7 @@
 import type { FC } from 'react';
-import { Container, Typography, Paper, Box } from '@mui/material';
+import { Container, Typography, Paper, Box, Button } from '@mui/material';
 import { Carousel } from '@/components';
+import { openExternalLink } from '@/utils/telegram';
 import banner1 from '@/assets/1.png';
 import banner2 from '@/assets/2.png';
 import banner3 from '@/assets/3.png';
@@ -39,11 +40,30 @@ const HomePage: FC = () => {
     },
   ];
 
+  const handleManagementClick = () => {
+    openExternalLink('https://llf-webview.vercel.app/login');
+  };
+
   return (
     <Container maxWidth="sm" sx={{ py: 2 }}>
       <Box sx={{ mb: 2 }}>
         <Carousel items={carouselItems} autoPlayInterval={4000} />
       </Box>
+
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={handleManagementClick}
+        sx={{
+          mb: 2,
+          py: 1.5,
+          fontSize: '1rem',
+          fontWeight: 600,
+          textTransform: 'none',
+        }}
+      >
+        Управление
+      </Button>
 
       <Paper sx={{ p: 3, borderRadius: 2, backgroundColor: theme => theme.palette.surface }}>
         <Typography variant="h6" gutterBottom>

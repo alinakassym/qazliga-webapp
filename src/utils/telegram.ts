@@ -85,6 +85,7 @@ interface TelegramWebApp {
   }) => void;
   showAlert: (message: string) => void;
   showConfirm: (message: string) => void;
+  openLink: (url: string, options?: { try_instant_view?: boolean }) => void;
 }
 
 declare global {
@@ -114,4 +115,14 @@ export const getTelegramUser = (): TelegramUser | null => {
 export const getTelegramColorScheme = (): 'light' | 'dark' => {
   const webApp = getTelegramWebApp();
   return webApp?.colorScheme || 'light';
+};
+
+export const openExternalLink = (url: string): void => {
+  const webApp = getTelegramWebApp();
+  if (webApp && webApp.openLink) {
+    webApp.openLink(url);
+  } else {
+    // Fallback для браузера (не Telegram)
+    window.open(url, '_blank');
+  }
 };
