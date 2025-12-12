@@ -1,7 +1,7 @@
 // qazliga/src/components/Header/SelectsRow.tsx
 
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Box, Select, MenuItem, FormControl, CircularProgress } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
 import { useCities, useLeagues } from '@/hooks';
@@ -9,13 +9,18 @@ import { useCities, useLeagues } from '@/hooks';
 export const SelectsRow: FC = () => {
   const { data: cities, isLoading, isError } = useCities();
   const [selectedCityId, setSelectedCityId] = useState<string>('1');
-  const [selectedLeagueId, setSelectedLeagueId] = useState<string>('');
 
   const {
     data: leaguesData,
     isLoading: isLeaguesLoading,
     isError: isLeaguesError,
   } = useLeagues({ cityId: selectedCityId ? Number(selectedCityId) : undefined });
+
+  const defaultLeagueId = useMemo(() => {
+    return leaguesData?.leagues.length ? leaguesData.leagues[0].id.toString() : '';
+  }, [leaguesData]);
+
+  const [selectedLeagueId, setSelectedLeagueId] = useState<string>(() => defaultLeagueId);
 
   const handleCityChange = (event: SelectChangeEvent) => {
     setSelectedCityId(event.target.value);
@@ -77,7 +82,10 @@ export const SelectsRow: FC = () => {
         </Select>
       </FormControl>
 
-      <FormControl sx={{ flex: 1 }} disabled={isLeaguesLoading || isLeaguesError}>
+      <FormControl
+        sx={{ flex: 1 }}
+        disabled={isLeaguesLoading || isLeaguesError || !leaguesData?.leagues.length}
+      >
         <Select
           value={selectedLeagueId}
           onChange={handleLeagueChange}
