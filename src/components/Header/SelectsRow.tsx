@@ -6,7 +6,7 @@ import { useCities } from '@/hooks';
 
 export const SelectsRow: FC = () => {
   const { data: cities, isLoading, isError } = useCities();
-  const [selectedCityId, setSelectedCityId] = useState<string>('');
+  const [selectedCityId, setSelectedCityId] = useState<string>('1');
   const [secondValue, setSecondValue] = useState('option1');
 
   const handleCityChange = (event: SelectChangeEvent) => {
