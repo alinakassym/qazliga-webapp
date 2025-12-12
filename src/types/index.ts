@@ -21,6 +21,7 @@ export type LoadingState = 'idle' | 'loading' | 'succeeded' | 'failed';
 export interface City {
   id: number;
   name: string;
+  icon?: string;
 }
 
 export interface League {
@@ -31,6 +32,7 @@ export interface League {
   cityName: string;
   leagueGroupId: number;
   leagueGroupName: string;
+  icon?: string;
 }
 
 export interface LeaguesQueryParams {

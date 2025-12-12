@@ -12,6 +12,7 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Avatar,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useLeagues } from '@/hooks';
@@ -57,7 +58,10 @@ const LeaguesPage: FC = (): ReactElement => {
               }}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="subtitle1">{cityName}</Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Avatar src={leagues[0]?.icon} alt={cityName} sx={{ mr: 2 }} />
+                  <Typography variant="subtitle1">{cityName}</Typography>
+                </Box>
               </AccordionSummary>
               <AccordionDetails>
                 <List>
