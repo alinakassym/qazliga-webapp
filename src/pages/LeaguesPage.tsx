@@ -2,7 +2,18 @@
 
 import type { FC, ReactElement } from 'react';
 import { useMemo } from 'react';
-import { Box, Typography, CircularProgress, List, ListItem, ListItemText } from '@mui/material';
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  List,
+  ListItem,
+  ListItemText,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useLeagues } from '@/hooks';
 
 const LeaguesPage: FC = (): ReactElement => {
@@ -24,10 +35,6 @@ const LeaguesPage: FC = (): ReactElement => {
 
   return (
     <Box sx={{ p: 2 }}>
-      <Typography variant="h5" component="h1" sx={{ mb: 2 }}>
-        Лиги
-      </Typography>
-
       {isLoading && (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
           <CircularProgress />
@@ -43,21 +50,28 @@ const LeaguesPage: FC = (): ReactElement => {
       {data?.leagues && (
         <Box>
           {Object.entries(leaguesByCity).map(([cityName, leagues]) => (
-            <Box key={cityName} sx={{ mb: 4 }}>
-              <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-                {cityName}
-              </Typography>
-              <List>
-                {leagues.map(league => (
-                  <ListItem key={league.id}>
-                    <ListItemText
-                      primary={league.name}
-                      secondary={`Группа: ${league.leagueGroupName}`}
-                    />
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
+            <Accordion
+              key={cityName}
+              sx={{
+                backgroundColor: theme => theme.palette.bgOpacity,
+              }}
+            >
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography variant="subtitle1">{cityName}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <List>
+                  {leagues.map(league => (
+                    <ListItem key={league.id}>
+                      <ListItemText
+                        primary={league.name}
+                        secondary={`Группа: ${league.leagueGroupName}`}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+              </AccordionDetails>
+            </Accordion>
           ))}
         </Box>
       )}
