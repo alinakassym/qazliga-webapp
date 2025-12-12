@@ -23,4 +23,19 @@ export interface City {
   name: string;
 }
 
+export interface League {
+  id: number;
+  name: string;
+  order: number;
+  cityId: number;
+  cityName: string;
+  leagueGroupId: number;
+  leagueGroupName: string;
+}
+
+export interface LeaguesQueryParams {
+  cityId?: number;
+  leagueGroupId?: number;
+}
+
 export * from './sponsors';
