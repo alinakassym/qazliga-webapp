@@ -9,13 +9,13 @@ import { useSafePaddingBottom, useSafePlatform } from '@/hooks';
 interface NavigationItem {
   label: string;
   path: string;
-  iconName: 'home' | 'trophy' | 'leaderboard' | 'person';
+  iconName: 'home' | 'trophy' | 'ranking' | 'leaderboard' | 'person';
 }
 
 const navigationItems: NavigationItem[] = [
   { label: 'Главная', path: '/', iconName: 'home' },
   { label: 'Лиги', path: '/leagues', iconName: 'trophy' },
-  { label: 'Рейтинг', path: '/rating', iconName: 'leaderboard' },
+  { label: 'Рейтинг', path: '/rating', iconName: 'ranking' },
   { label: 'Профиль', path: '/profile', iconName: 'person' },
 ];
 

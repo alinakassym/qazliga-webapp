@@ -83,7 +83,7 @@ export const SelectsRow: FC = () => {
       sx={{
         display: 'flex',
         gap: 1,
-        pb: 2,
+        pb: 1,
       }}
     >
       {/* Sport Select */}
