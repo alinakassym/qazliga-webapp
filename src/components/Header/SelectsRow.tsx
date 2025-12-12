@@ -5,8 +5,32 @@ import { useMemo, useState } from 'react';
 import { Box, Select, MenuItem, FormControl, CircularProgress } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
 import { useCities, useLeagues } from '@/hooks';
+import { SportIcon } from '../icons/SportIcons';
+
+type Sport = {
+  id: string;
+  name: string;
+  icon: 'volleyball' | 'football';
+  color: string;
+};
+
+const SPORTS: Sport[] = [
+  {
+    id: 'volleyball',
+    name: 'Волейбол',
+    icon: 'volleyball',
+    color: '#5060D8',
+  },
+  {
+    id: 'football',
+    name: 'Футбол',
+    icon: 'football',
+    color: '#8450D8',
+  },
+];
 
 export const SelectsRow: FC = () => {
+  const [selectedSportId, setSelectedSportId] = useState<string>('volleyball');
   const { data: cities, isLoading, isError } = useCities();
   const [selectedCityId, setSelectedCityId] = useState<string>('1');
 
@@ -40,6 +64,10 @@ export const SelectsRow: FC = () => {
     return leagues[0].id.toString();
   }, [isLeaguesLoading, leagues, selectedLeagueId]);
 
+  const handleSportChange = (event: SelectChangeEvent) => {
+    setSelectedSportId(event.target.value);
+  };
+
   const handleCityChange = (event: SelectChangeEvent) => {
     setSelectedCityId(event.target.value);
     // сбрасываем ручной выбор, чтобы для нового города показалась первая лига
@@ -58,6 +86,50 @@ export const SelectsRow: FC = () => {
         pb: 2,
       }}
     >
+      {/* Sport Select */}
+      <FormControl sx={{ flex: 1, maxWidth: 68 }}>
+        <Select
+          value={selectedSportId}
+          onChange={handleSportChange}
+          size="small"
+          displayEmpty
+          renderValue={selected => {
+            const sport = SPORTS.find(s => s.id === selected);
+            if (!sport) return '';
+            return (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <SportIcon name={sport.icon} size={24} color={sport.color} />
+              </Box>
+            );
+          }}
+          sx={{
+            backgroundColor: theme => theme.palette.bgOpacity,
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            borderRadius: 2,
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'transparent',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: theme => theme.palette.primary.main,
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: theme => theme.palette.primary.main,
+            },
+          }}
+        >
+          {SPORTS.map(sport => (
+            <MenuItem key={sport.id} value={sport.id}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <SportIcon name={sport.icon} size={24} color={sport.color} />
+                <span>{sport.name}</span>
+              </Box>
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      {/* City Select */}
       <FormControl sx={{ flex: 1 }} disabled={isLoading || isError}>
         <Select
           value={selectedCityId}

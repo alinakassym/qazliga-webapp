@@ -45,26 +45,6 @@ const HomePage: FC = () => {
         <Carousel items={carouselItems} autoPlayInterval={4000} />
       </Box>
 
-      <Paper sx={{ p: 3, mb: 3, backgroundColor: theme => theme.palette.surface }}>
-        <Typography variant="h6" gutterBottom>
-          Sport Icons
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 3, alignItems: 'center', mb: 2 }}>
-          <Box sx={{ textAlign: 'center' }}>
-            <SportIcon name="volleyball" size={48} color="#5060D8" />
-            <Typography variant="caption" display="block" sx={{ mt: 1 }}>
-              Volleyball
-            </Typography>
-          </Box>
-          <Box sx={{ textAlign: 'center' }}>
-            <SportIcon name="football" size={48} color="#8450D8" />
-            <Typography variant="caption" display="block" sx={{ mt: 1 }}>
-              Football
-            </Typography>
-          </Box>
-        </Box>
-      </Paper>
-
       <Paper sx={{ p: 3, backgroundColor: theme => theme.palette.surface }}>
         <Typography variant="h6" gutterBottom>
           Getting Started
