@@ -9,6 +9,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemAvatar,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -61,11 +62,14 @@ const LeaguesPage: FC = (): ReactElement => {
               <AccordionDetails>
                 <List>
                   {leagues.map(league => (
-                    <ListItem key={league.id}>
-                      <ListItemText
-                        primary={league.name}
-                        secondary={`Группа: ${league.leagueGroupName}`}
-                      />
+                    <ListItem
+                      key={league.id}
+                      sx={{ borderTop: theme => `1px solid ${theme.palette.cardBorder}` }}
+                    >
+                      <ListItemAvatar>
+                        <Avatar src={league.icon} alt={league.name} />
+                      </ListItemAvatar>
+                      <ListItemText primary={league.name} secondary={cityName} />
                     </ListItem>
                   ))}
                 </List>
