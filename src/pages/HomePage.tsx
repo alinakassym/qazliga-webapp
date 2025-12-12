@@ -1,14 +1,11 @@
 import type { FC } from 'react';
 import { Container, Typography, Paper, Box } from '@mui/material';
-import { getTelegramUser } from '@/utils/telegram';
-import { Carousel } from '@/components';
+import { Carousel, SportIcon } from '@/components';
 import banner1 from '@/assets/1.png';
 import banner2 from '@/assets/2.png';
 import banner3 from '@/assets/3.png';
 
 const HomePage: FC = () => {
-  const user = getTelegramUser();
-
   const carouselItems = [
     {
       id: '1',
@@ -48,24 +45,25 @@ const HomePage: FC = () => {
         <Carousel items={carouselItems} autoPlayInterval={4000} />
       </Box>
 
-      {user && (
-        <Paper sx={{ p: 3, mb: 3, backgroundColor: theme => theme.palette.surface }}>
-          <Typography variant="h6" gutterBottom>
-            User Info
-          </Typography>
-          <Typography variant="body2">
-            <strong>ID:</strong> {user.id}
-          </Typography>
-          <Typography variant="body2">
-            <strong>Name:</strong> {user.first_name} {user.last_name || ''}
-          </Typography>
-          {user.username && (
-            <Typography variant="body2">
-              <strong>Username:</strong> @{user.username}
+      <Paper sx={{ p: 3, mb: 3, backgroundColor: theme => theme.palette.surface }}>
+        <Typography variant="h6" gutterBottom>
+          Sport Icons
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 3, alignItems: 'center', mb: 2 }}>
+          <Box sx={{ textAlign: 'center' }}>
+            <SportIcon name="volleyball" size={48} color="#5060D8" />
+            <Typography variant="caption" display="block" sx={{ mt: 1 }}>
+              Volleyball
             </Typography>
-          )}
-        </Paper>
-      )}
+          </Box>
+          <Box sx={{ textAlign: 'center' }}>
+            <SportIcon name="football" size={48} color="#8450D8" />
+            <Typography variant="caption" display="block" sx={{ mt: 1 }}>
+              Football
+            </Typography>
+          </Box>
+        </Box>
+      </Paper>
 
       <Paper sx={{ p: 3, backgroundColor: theme => theme.palette.surface }}>
         <Typography variant="h6" gutterBottom>
