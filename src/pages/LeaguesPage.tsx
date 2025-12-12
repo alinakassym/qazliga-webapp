@@ -51,12 +51,7 @@ const LeaguesPage: FC = (): ReactElement => {
       {data?.leagues && (
         <Box>
           {Object.entries(leaguesByCity).map(([cityName, leagues]) => (
-            <Accordion
-              key={cityName}
-              sx={{
-                backgroundColor: theme => theme.palette.bgOpacity,
-              }}
-            >
+            <Accordion key={cityName}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Avatar src={leagues[0]?.icon} alt={cityName} sx={{ mr: 2 }} />

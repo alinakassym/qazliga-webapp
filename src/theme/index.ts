@@ -84,6 +84,21 @@ export const createAppTheme = (mode: PaletteMode = 'light') => {
           },
         },
       },
+      MuiAccordion: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            backgroundColor: theme.palette.surface,
+            backgroundImage: 'none',
+            boxShadow: 'none',
+            '&:before': {
+              display: 'none',
+            },
+            '&.Mui-expanded': {
+              margin: 0,
+            },
+          }),
+        },
+      },
     },
   });
 };
