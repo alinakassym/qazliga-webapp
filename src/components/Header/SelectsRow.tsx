@@ -1,7 +1,7 @@
 // qazliga/src/components/Header/SelectsRow.tsx
 
 import type { FC } from 'react';
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Box, Select, MenuItem, FormControl, CircularProgress } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
 import { useCities, useLeagues } from '@/hooks';
@@ -16,14 +16,33 @@ export const SelectsRow: FC = () => {
     isError: isLeaguesError,
   } = useLeagues({ cityId: selectedCityId ? Number(selectedCityId) : undefined });
 
-  const defaultLeagueId = useMemo(() => {
-    return leaguesData?.leagues.length ? leaguesData.leagues[0].id.toString() : '';
-  }, [leaguesData]);
+  // ✅ важно: стабилизируем ссылку на массив (иначе exhaustive-deps ругается)
+  const leagues = useMemo(() => leaguesData?.leagues ?? [], [leaguesData?.leagues]);
 
-  const [selectedLeagueId, setSelectedLeagueId] = useState<string>(() => defaultLeagueId);
+  // храним только ручной выбор пользователя
+  const [selectedLeagueId, setSelectedLeagueId] = useState<string>('');
+
+  // итоговое значение для Select (или выбранное пользователем, или первая лига)
+  const effectiveLeagueId = useMemo(() => {
+    // 3) Пока список не загружен → не выбираем ничего
+    if (isLeaguesLoading) return '';
+
+    // 2) Если список лиг пустой → ничего не выбираем (и селект будет disabled)
+    if (!leagues.length) return '';
+
+    // если пользователь уже выбирал и выбранная лига есть в списке — используем ее
+    const exists =
+      selectedLeagueId !== '' && leagues.some(l => l.id.toString() === selectedLeagueId);
+
+    if (exists) return selectedLeagueId;
+
+    // 1) После получения списка лиг → автоматически выбрать первую лигу
+    return leagues[0].id.toString();
+  }, [isLeaguesLoading, leagues, selectedLeagueId]);
 
   const handleCityChange = (event: SelectChangeEvent) => {
     setSelectedCityId(event.target.value);
+    // сбрасываем ручной выбор, чтобы для нового города показалась первая лига
     setSelectedLeagueId('');
   };
 
@@ -84,10 +103,10 @@ export const SelectsRow: FC = () => {
 
       <FormControl
         sx={{ flex: 1 }}
-        disabled={isLeaguesLoading || isLeaguesError || !leaguesData?.leagues.length}
+        disabled={isLeaguesLoading || isLeaguesError || leagues.length === 0}
       >
         <Select
-          value={selectedLeagueId}
+          value={effectiveLeagueId}
           onChange={handleLeagueChange}
           size="small"
           displayEmpty
@@ -95,7 +114,7 @@ export const SelectsRow: FC = () => {
             if (!selected) {
               return <span style={{ opacity: 0.6 }}>Выберите лигу</span>;
             }
-            const league = leaguesData?.leagues.find(l => l.id.toString() === selected);
+            const league = leagues.find(l => l.id.toString() === selected);
             return league?.name || '';
           }}
           sx={{
@@ -120,7 +139,7 @@ export const SelectsRow: FC = () => {
             </MenuItem>
           )}
           {isLeaguesError && <MenuItem disabled>Ошибка загрузки</MenuItem>}
-          {leaguesData?.leagues.map(league => (
+          {leagues.map(league => (
             <MenuItem key={league.id} value={league.id.toString()}>
               {league.name}
             </MenuItem>
