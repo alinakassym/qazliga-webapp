@@ -1,3 +1,5 @@
+// qazliga/src/services/leagues.ts
+
 import { api } from './api';
 import type { League, LeaguesQueryParams } from '@/types';
 

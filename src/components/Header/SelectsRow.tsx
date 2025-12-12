@@ -1,20 +1,29 @@
+// qazliga/src/components/Header/SelectsRow.tsx
+
 import type { FC } from 'react';
 import { useState } from 'react';
 import { Box, Select, MenuItem, FormControl, CircularProgress } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
-import { useCities } from '@/hooks';
+import { useCities, useLeagues } from '@/hooks';
 
 export const SelectsRow: FC = () => {
   const { data: cities, isLoading, isError } = useCities();
   const [selectedCityId, setSelectedCityId] = useState<string>('1');
-  const [secondValue, setSecondValue] = useState('option1');
+  const [selectedLeagueId, setSelectedLeagueId] = useState<string>('');
+
+  const {
+    data: leaguesData,
+    isLoading: isLeaguesLoading,
+    isError: isLeaguesError,
+  } = useLeagues({ cityId: selectedCityId ? Number(selectedCityId) : undefined });
 
   const handleCityChange = (event: SelectChangeEvent) => {
     setSelectedCityId(event.target.value);
+    setSelectedLeagueId('');
   };
 
-  const handleSecondChange = (event: SelectChangeEvent) => {
-    setSecondValue(event.target.value);
+  const handleLeagueChange = (event: SelectChangeEvent) => {
+    setSelectedLeagueId(event.target.value);
   };
 
   return (
@@ -68,11 +77,19 @@ export const SelectsRow: FC = () => {
         </Select>
       </FormControl>
 
-      <FormControl sx={{ flex: 1 }}>
+      <FormControl sx={{ flex: 1 }} disabled={isLeaguesLoading || isLeaguesError}>
         <Select
-          value={secondValue}
-          onChange={handleSecondChange}
+          value={selectedLeagueId}
+          onChange={handleLeagueChange}
           size="small"
+          displayEmpty
+          renderValue={selected => {
+            if (!selected) {
+              return <span style={{ opacity: 0.6 }}>Выберите лигу</span>;
+            }
+            const league = leaguesData?.leagues.find(l => l.id.toString() === selected);
+            return league?.name || '';
+          }}
           sx={{
             backgroundColor: theme => theme.palette.bgOpacity,
             backdropFilter: 'blur(10px)',
@@ -89,9 +106,17 @@ export const SelectsRow: FC = () => {
             },
           }}
         >
-          <MenuItem value="option1">Вариант 1</MenuItem>
-          <MenuItem value="option2">Вариант 2</MenuItem>
-          <MenuItem value="option3">Вариант 3</MenuItem>
+          {isLeaguesLoading && (
+            <MenuItem disabled>
+              <CircularProgress size={20} />
+            </MenuItem>
+          )}
+          {isLeaguesError && <MenuItem disabled>Ошибка загрузки</MenuItem>}
+          {leaguesData?.leagues.map(league => (
+            <MenuItem key={league.id} value={league.id.toString()}>
+              {league.name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Box>
